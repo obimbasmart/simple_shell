@@ -11,7 +11,7 @@
 int main(__attribute__((unused))int argc,
 		__attribute__((unused)) char **argv, char **env)
 {
-	int is_terminal;
+	int is_terminal, response;
 	char *lineptr;
 	char *new_argv[2];
 	size_t lineLen, nread;
@@ -33,9 +33,9 @@ int main(__attribute__((unused))int argc,
 		new_argv[0] = lineptr;
 		new_argv[1] = NULL;
 
-		_execute(new_argv, env);
-
-	} while (is_terminal);
+		response = _execute(new_argv, env);
+		free(lineptr);
+	} while (is_terminal && response);
 
 	return (0);
 }
