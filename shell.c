@@ -29,7 +29,7 @@ int main(__attribute__((unused))int argc,
 		}
 
 		nread = getline(&lineptr, &lineLen, stdin);
-		remove_new_line(&lineptr, nread);
+		lineptr[nread - 1] = '\0';
 		new_argv[0] = lineptr;
 		new_argv[1] = NULL;
 
