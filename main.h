@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-
+int extern errno;
 
 
 char **split_string(char *, char *);

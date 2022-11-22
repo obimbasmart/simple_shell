@@ -1,14 +1,20 @@
 #include "main.h"
 
-int main(__attribute__((unused))int argc, 
+/**
+ * main - driver program for simple super shell
+ * @argc: number of args passed to programm
+ * @argv: array of args to programm
+ * @env: array of environmet variables
+ *
+ * Return: 0 sucess
+ */
+int main(__attribute__((unused))int argc,
 		__attribute__((unused)) char **argv, char **env)
 {
 	int status;
-	char *lineptr; 
+	char *lineptr;
 	char *new_argv[2];
-	size_t lineLen;
-	size_t nread;
-	extern int errno;
+	size_t lineLen, nread;
 
 	lineptr = NULL;
 	lineLen = 0;
@@ -18,7 +24,8 @@ int main(__attribute__((unused))int argc,
 
 	while ((nread = getline(&lineptr, &lineLen, stdin)))
 	{
-		/* the getline() function returns the entire line from
+		/**
+		 * the getline() function returns the entire line from
 		 * a stream including the new line character '\n' if one was found
 		 * this new line character when included in a file pathname
 		 * leads to invalid pathname - hence the new line char
@@ -42,7 +49,7 @@ int main(__attribute__((unused))int argc,
 		wait(&status);
 		printf("#mySimpleShell$: ");
 	}
-	fflush(stdout);	
+	fflush(stdout);
 	return (0);
 }
 
