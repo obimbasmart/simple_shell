@@ -14,7 +14,6 @@ extern int errno;
 
 size_t _puts(char *);
 int _execute(char **, char **);
-char **split_string(char *, char *);
-void remove_new_line(char **, size_t);
-
+char **tokenize(char *, char *);
 #endif /* end of main_h */
+
