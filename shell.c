@@ -30,19 +30,18 @@ int main(__attribute__((unused))int argc,
 
 		getline(&lineptr, &lineLen, stdin);
 
-		token = strtok(lineptr, " \r\n\t\v");
+		token = strtok(lineptr, " \r\n\t\v\a");
 
-		while (token)
+		if (token)
 		{
 			_argv[0] = token;
 			response = _execute(_argv, env);
-			token = strtok(NULL, " \r\t\n\v");
 		}
 
 		free(lineptr);
 		lineptr = NULL;
 
-	} while (is_terminal && response != -1);
+	} while (response != -1 && token);
 
 	return (0);
 }
