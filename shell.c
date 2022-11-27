@@ -16,7 +16,7 @@ int main(__attribute__((unused))int argc,
 	char *_argv[] = { NULL, NULL };
 	size_t lineLen;
 
-	lineptr = NULL;
+	lineptr = token = NULL;
 	lineLen = is_terminal = 0;
 	response = 1;
 
