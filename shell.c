@@ -12,37 +12,38 @@ int main(__attribute__((unused))int argc,
 		__attribute__((unused)) char **argv, char **env)
 {
 	int is_terminal, response;
-	char *lineptr;
-	char *new_argv[2], **tokens;
-	size_t lineLen, nread;
+	char *lineptr, *token;
+	char *_argv[] = { NULL, NULL };
+	size_t lineLen;
 
 	lineptr = NULL;
 	lineLen = is_terminal = 0;
-	new_argv[0] = NULL;
-	new_argv[1] = NULL;
 	response = 1;
 
 	do {
 
 		if (isatty(fileno(stdin) == 1))
 		{
-			_puts("#mySimpleShell$: ");
+			_puts("#myShell$: ");
 			is_terminal = 1;
 		}
 
-		nread = getline(&lineptr, &lineLen, stdin);
-		lineptr[nread - 1] = '\0';
+		getline(&lineptr, &lineLen, stdin);
 
-		tokens = tokenize(lineptr, " ");
-		while (*tokens)
+		token = strtok(lineptr, " \n\t\v");
+
+		while (token)
 		{
-			new_argv[0] = *tokens;
-			_execute(new_argv, env);
-			tokens++;
+			printf("%s\n", token);
+			_argv[0] = token;
+			response = _execute(_argv, env);
+			token = strtok(NULL, " \t\n\v");
 		}
 
 		free(lineptr);
-	} while (is_terminal && response);
+		lineptr = NULL;
+
+	} while (is_terminal && response != -1);
 
 	return (0);
 }
