@@ -14,10 +14,10 @@ int main(__attribute__((unused))int argc,
 	int is_terminal, response;
 	char *lineptr, *token;
 	char *_argv[] = { NULL, NULL };
-	size_t lineLen;
+	size_t lineLen, nread;
 
 	lineptr = token = NULL;
-	lineLen = is_terminal = 0;
+	lineLen = is_terminal = nread = 0;
 	response = 1;
 
 	signal(SIGINT, handle_sigint);
@@ -30,7 +30,8 @@ int main(__attribute__((unused))int argc,
 			is_terminal = 1;
 		}
 
-		getline(&lineptr, &lineLen, stdin);
+		nread = getline(&lineptr, &lineLen, stdin);
+		lineptr[nread - 1] = '\0';
 		token = strtok(lineptr, DELIM);
 
 		if (token)
