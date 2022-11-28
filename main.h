@@ -11,7 +11,7 @@
 #include <string.h>
 #include <signal.h>
 
-#define DELIM " \t\n\r\a\v\0"
+#define DELIM " \t\n\r\a\v"
 extern int errno;
 
 void handle_sigint(int);
