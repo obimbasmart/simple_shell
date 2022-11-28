@@ -9,9 +9,12 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <signal.h>
 
+#define DELIM " \t\n\r\a\v"
 extern int errno;
 
+void handle_sigint(int);
 size_t _puts(char *);
 int _execute(char **, char **);
 char **tokenize(char *, char *);

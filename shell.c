@@ -20,6 +20,8 @@ int main(__attribute__((unused))int argc,
 	lineLen = is_terminal = 0;
 	response = 1;
 
+	signal(SIGINT, handle_sigint);
+
 	do {
 
 		if (isatty(fileno(stdin) == 1))
@@ -29,8 +31,7 @@ int main(__attribute__((unused))int argc,
 		}
 
 		getline(&lineptr, &lineLen, stdin);
-
-		token = strtok(lineptr, " \r\n\t\v\a");
+		token = strtok(lineptr, DELIM);
 
 		if (token)
 		{
@@ -41,8 +42,22 @@ int main(__attribute__((unused))int argc,
 		free(lineptr);
 		lineptr = NULL;
 
-	} while (response != -1 && token);
+	} while (response != -1 && (is_terminal || token));
 
 	return (0);
+}
+
+
+/**
+ * handle_sigint - handler for SIGINT: CTRL+d
+ * @signum: the signal ID
+ *
+ * Return: nothing
+ */
+void handle_sigint(int signum)
+{
+	if (signum == SIGINT)
+		_puts("\n#myShell: ");
+
 }
 
