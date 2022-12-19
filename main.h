@@ -12,6 +12,7 @@
 #include <string.h>
 #include <signal.h>
 #include <sys/stat.h>
+#include <ctype.h>
 
 /* global var */
 
@@ -38,6 +39,7 @@ void handle_sigint(int);
 size_t _puts(char *);
 int _execute(char **, char **);
 void _isatty(void);
+char *TrimWhiteSpace(char *str);
 /* char **tokenize(char *str); */
 int f_exist(char *path);
 
