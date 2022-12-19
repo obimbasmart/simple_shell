@@ -8,57 +8,44 @@
  *
  * Return: 0 sucess
  */
-int main(__attribute__((unused))int argc,
-		__attribute__((unused)) char **argv, char **env)
+
+/* define global variable for shell data */
+s_data_t shell_data;
+
+int main(__attribute__((unused))int argc, char **argv, char **env)
 {
-	int is_terminal, response;
-	char *lineptr, *token;
-	char *_argv[] = { NULL, NULL };
-	size_t lineLen, nread;
+	/* int response; */
+	char *lineptr;
+	size_t nline, nlen;
+	char **_argv;
+	ssize_t nread;
 
-	lineptr = token = NULL;
-	lineLen = is_terminal = nread = 0;
-	response = 1;
-
+	lineptr = NULL;
+	shell_data._isterminal = nread = nlen = 0;
 	signal(SIGINT, handle_sigint);
 
 	do {
 
-		if (isatty(fileno(stdin) == 1))
+		_isatty();
+		nread = getline(&lineptr, &nline, stdin);
+		/* check for end of file */
+		if (nread == -1)
+			break;
+
+		_argv = tokenize(lineptr);
+
+		if (_argv[0])
 		{
-			_puts("#myShell$: ");
-			is_terminal = 1;
+			if (!f_exist(_argv[0]) || _argv[1])
+				perror(argv[0]);
+			else
+				shell_data.response = _execute(_argv, env);
 		}
 
-		nread = getline(&lineptr, &lineLen, stdin);
-		lineptr[nread - 1] = '\0';
-		token = strtok(lineptr, DELIM);
+	} while (shell_data._isterminal);
 
-		if (token)
-		{
-			_argv[0] = token;
-			response = _execute(_argv, env);
-		}
-
-		free(lineptr);
-		lineptr = NULL;
-
-	} while (response != -1 && (is_terminal || token));
-
+	free(lineptr);
+	lineptr = NULL;
 	return (0);
-}
-
-
-/**
- * handle_sigint - handler for SIGINT: CTRL+d
- * @signum: the signal ID
- *
- * Return: nothing
- */
-void handle_sigint(int signum)
-{
-	if (signum == SIGINT)
-		_puts("\n#myShell: ");
-
 }
 

@@ -11,7 +11,6 @@
 #include <sys/wait.h>
 #include <string.h>
 #include <signal.h>
-#include <sys/stat.h>
 
 /* global var */
 typedef struct global_var {
@@ -32,7 +31,6 @@ size_t _puts(char *);
 int _execute(char **, char **);
 void _isatty(void);
 char **tokenize(char *str);
-int f_exist(char *path);
 
 #endif /* end of main_h */
 
