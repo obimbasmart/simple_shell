@@ -17,7 +17,7 @@ int main(__attribute__((unused))int argc, char **argv, char **env)
 	/* int response; */
 	char *lineptr;
 	size_t nline, nlen;
-	char **_argv;
+	char *_argv[] = {NULL, NULL};
 	ssize_t nread;
 
 	lineptr = NULL;
@@ -32,17 +32,21 @@ int main(__attribute__((unused))int argc, char **argv, char **env)
 		if (nread == -1)
 			break;
 
-		_argv = tokenize(lineptr);
+		lineptr[nread - 1] = '\0';
 
-		if (_argv[0])
+		/* _argv = tokenize(lineptr); */
+		_argv[0] = lineptr;
+
+		if (nread > 1)
 		{
-			if (!f_exist(_argv[0]) || _argv[1])
+			if (!f_exist(lineptr))
 				perror(argv[0]);
+
 			else
 				shell_data.response = _execute(_argv, env);
 		}
 
-	} while (shell_data._isterminal);
+	} while (lineptr || shell_data._isterminal);
 
 	free(lineptr);
 	lineptr = NULL;

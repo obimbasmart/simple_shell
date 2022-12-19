@@ -75,30 +75,3 @@ void _isatty(void)
 	else
 		shell_data._isterminal = 0;
 }
-
-
-/**
- * tokenize - split a string into tokens
- * @str: original string
- *
- * Return: array of strings
- */
-char **tokenize(char *str)
-{
-	size_t idx, size = 1;
-	char *token;
-	char **array_s = malloc(sizeof(char *));
-
-	token = strtok(str, DELIM);
-	idx = 0;
-	while (token)
-	{
-		array_s = realloc(array_s, sizeof(char *) * ++size);
-		array_s[idx] = strdup(token);
-		token = strtok(NULL, DELIM);
-		idx++;
-	}
-	array_s[idx] = token;
-	return (array_s);
-}
-

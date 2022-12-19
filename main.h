@@ -14,7 +14,14 @@
 #include <sys/stat.h>
 
 /* global var */
-typedef struct global_var {
+
+/**
+ * struct global_var - struct representatio of all global varas
+ * @_isterminal: flag for terminal and non-terminal
+ * @response: response from child program
+ */
+typedef struct global_var
+{
 	int _isterminal;
 	int response;
 } s_data_t;
@@ -31,7 +38,7 @@ void handle_sigint(int);
 size_t _puts(char *);
 int _execute(char **, char **);
 void _isatty(void);
-char **tokenize(char *str);
+/* char **tokenize(char *str); */
 int f_exist(char *path);
 
 #endif /* end of main_h */
