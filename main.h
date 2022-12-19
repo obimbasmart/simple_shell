@@ -40,7 +40,7 @@ size_t _puts(char *);
 int _execute(char **, char **);
 void _isatty(void);
 char *TrimWhiteSpace(char *str);
-/* char **tokenize(char *str); */
+char **tokenize(char *str);
 int f_exist(char *path);
 
 #endif /* end of main_h */

@@ -17,7 +17,8 @@ int main(__attribute__((unused))int argc, char **argv, char **env)
 	/* int response; */
 	char *lineptr, *lineptr_c;
 	size_t nline, nlen;
-	char *_argv[] = {NULL, NULL};
+	/* char *_argv[] = {NULL, NULL}; */
+	char **_argv;
 	ssize_t nread;
 
 	lineptr = lineptr_c = NULL;
@@ -32,21 +33,21 @@ int main(__attribute__((unused))int argc, char **argv, char **env)
 		if (nread == -1)
 			break;
 
-		lineptr[nread - 1] = '\0';
-		lineptr_c = TrimWhiteSpace(lineptr);
+		/* lineptr[nread - 1] = '\0'; */
+		/* lineptr_c = TrimWhiteSpace(lineptr); */
 
-		/* _argv = tokenize(lineptr); */
-		if (nread > 1 && strlen(lineptr_c))
-		{	
-			if (!f_exist(lineptr_c))
-				perror(argv[0]);
+		_argv = tokenize(lineptr);
+		/* if (nread > 1 && strlen(lineptr_c)) */
+		if (_argv[0] && !f_exist(_argv[0]))
+			perror(argv[0]);
 
-			else
+		else
 			{
-				_argv[0] = lineptr_c;
-				shell_data.response = _execute(_argv, env);
+				if (_argv[1] && !f_exist(_argv[1]))
+					perror(argv[0]);
+				else
+					shell_data.response = _execute(_argv, env);
 			}
-		}
 
 	} while (lineptr || shell_data._isterminal);
 
