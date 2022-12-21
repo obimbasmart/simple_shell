@@ -15,13 +15,13 @@ s_data_t shell_data;
 int main(__attribute__((unused))int argc, char **argv, char **env)
 {
 	/* int response; */
-	char *lineptr, *lineptr_c;
+	char *lineptr;
 	size_t nline, nlen;
 	/* char *_argv[] = {NULL, NULL}; */
 	char **_argv;
 	ssize_t nread;
 
-	lineptr = lineptr_c = NULL;
+	lineptr = NULL;
 	shell_data._isterminal = nread = nlen = 0;
 	signal(SIGINT, handle_sigint);
 
@@ -33,25 +33,25 @@ int main(__attribute__((unused))int argc, char **argv, char **env)
 		if (nread == -1)
 			break;
 
-		/* lineptr[nread - 1] = '\0'; */
-		/* lineptr_c = TrimWhiteSpace(lineptr); */
-
 		_argv = tokenize(lineptr);
-		/* if (nread > 1 && strlen(lineptr_c)) */
-		if (_argv[0] && !f_exist(_argv[0]))
-			perror(argv[0]);
+		if (_argv && _argv[0])
+		{
+			if (!f_exist(_argv[0]))
+				perror(argv[0]);
 
-		else
+			else
 			{
 				if (_argv[1] && !f_exist(_argv[1]))
 					perror(argv[0]);
 				else
 					shell_data.response = _execute(_argv, env);
 			}
+		}
 
 	} while (lineptr || shell_data._isterminal);
 
 	free(lineptr);
+	free(_argv);
 	lineptr = NULL;
 	return (0);
 }

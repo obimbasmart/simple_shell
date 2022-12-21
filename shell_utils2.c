@@ -23,9 +23,9 @@ size_t _puts(char *str)
  */
 char **tokenize(char *str)
 {
-	size_t idx = 1;
+	size_t idx, size = 3;
 	char *token;
-	char **array_s = malloc(sizeof(char *) * 3);
+	char **array_s = malloc(sizeof(char *) * size);
 
 	token = strtok(str, DELIM);
 	idx = 0;
@@ -34,11 +34,6 @@ char **tokenize(char *str)
 		array_s[idx] = strdup(token);
 		token = strtok(NULL, DELIM);
 		idx++;
-		if (idx == 2)
-		{
-			token = NULL;
-			break;
-		}
 	}
 	array_s[idx] = token;
 	return (array_s);
