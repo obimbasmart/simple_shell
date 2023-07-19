@@ -68,9 +68,11 @@ int init_process(char **toks)
 		do {
 			waitpid(pid, &stat, WUNTRACED); /* wait for child process to exit
 									* or get terminated by a signal
-									*/
+								*/
 
 		} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
 	}
+	free(command_path); /* free command_path if NULL*/
+	
 	return (1);
 }
