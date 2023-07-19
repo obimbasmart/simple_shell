@@ -30,18 +30,18 @@ int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
 
 char *find_path(char *cmd);
-char* my_getline();
+char *my_getline(void);
 char *print_env(char **argv);
 
 extern char **environ;
 
 void *_realloc(void *ptr, unsigned int former_size, unsigned int current_size);
-int init_process();
-int handle_cmd( char **argv);
+int init_process(void);
+int handle_cmd(char **argv);
 
 /*functions in main*/
-void myshell_loop();
-char *get_line();
+void myshell_loop(void);
+char *get_line(void);
 int _putchar(char *c);
 char **tokenize_string(char *lineptr);
 int execute_cmd(char **argv);

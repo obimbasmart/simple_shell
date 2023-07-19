@@ -9,7 +9,7 @@
 char **tokenize_string(char *lineptr)
 {
 	int buf = TOKEN_BUFFSIZE, index = 0;
-	char **toks = malloc(buf * sizeof(char*));
+	char **toks = malloc(buf * sizeof(char *));
 	char *token;
 	const char *delim = " \n\t";
 	char *error = "tsh: allocation error\n";
@@ -36,7 +36,7 @@ char **tokenize_string(char *lineptr)
 	}
 	toks[index] = NULL;
 
-	return toks;
+	return (toks);
 }
 
 /**

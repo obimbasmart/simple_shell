@@ -1,5 +1,6 @@
 #include "main.h"
-/*
+
+/**
  * main - Entry point to the shell loop
  *
  * Return: 0 on Success
@@ -10,7 +11,7 @@ int main(void)
 	return (0);
 }
 
-/*
+/**
  * myshell_loop - shell loop
  *
  * Return: return void
@@ -22,7 +23,7 @@ void myshell_loop(void)
 	int stat;
 	char *prompt = "$";
 	size_t buf = 0; /*buffer size allocated by getline()*/
-    ssize_t charsRead;
+	ssize_t charsRead;
 
 	do {
 		if (isatty(STDIN_FILENO)) /* interactive mode */
@@ -50,8 +51,8 @@ void myshell_loop(void)
 		argv = tokenize_string(lineptr); /* split line into tokens */
 		stat = execute_cmd(argv);
 
-		free(argv);		
+		free(argv);
 	} while (stat);
-	
+
 	free(lineptr);
 }

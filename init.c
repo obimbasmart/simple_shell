@@ -1,27 +1,23 @@
 #include "main.h"
 
-char *builtin_arr[] = {
-	"cd",
-	"exit",
+char *builtin_arr[] = { "cd", "exit",
 }; /* array of strings: builtin commands */
 
-int (*builtin_func[]) (char **) = {
-	    &my_cd,
-		&my_exit,
+int (*builtin_func[]) (char **) = { &my_cd, &my_exit,
 }; /* array of function pointers */
 
 /**
- *  * builtins_number - return the number of builtin functions
- *   *
- *    * Return: int
- *     */
+ * builtins_number - return the number of builtin functions
+ *
+ * Return: int
+ */
 int builtins_number(void)
 {
-	  return sizeof(builtin_arr) / sizeof(char *);
+	return (sizeof(builtin_arr) / sizeof(char *));
 }
 
 
-/*
+/**
  * init_process - initiates the process
  *
  * @toks: array of command-line arguments passed to the program
@@ -61,38 +57,36 @@ int init_process(char **toks)
 		}
 	}
 	else if (pid < 0) /* error: fork fail */
-	{
 		perror("hsh");
-	}
+
 	else /* parent is process is running */
 	{
 		do {
-			waitpid(pid, &stat, WUNTRACED); /* wait for chile process to exit or
+			waitpid(pid, &stat, WUNTRACED); /* wait for child process to exit or
 											 * get terminated by a signal
 											 */
 		} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
 	}
-	return 1;
+	return (1);
 }
 
 /**
- *  * execute_cmd - seeks to execute builtin functions
- *   * @argv: array of command-line arguments passed to the program
- *    * Return: return to initiation of process if the command is not builtin
- *     */
+ * execute_cmd - seeks to execute builtin functions
+ * @argv: array of command-line arguments passed to the program
+ *
+ * Return: return to initiation of process if the command is not builtin
+ */
 int execute_cmd(char **argv)
 {
 	int j;
 
 	if (argv[0] == NULL) /* no command */
-		return 1;
+		return (1);
 
 	for (j = 0; j < builtins_number(); j++)
 	{
 		if (_strcmp(argv[0], builtin_arr[j]) == 0)
-		{
-			return (*builtin_func[j])(argv);
-		}
+			return ((*builtin_func[j])(argv));
 	}
-	return init_process(argv);
+	return (init_process(argv));
 }

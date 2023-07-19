@@ -61,7 +61,7 @@ char *_strncat(char *dest, char *origin, int n)
 
 /**
  * _strlen - returns the string length
- * @s: the string to determine its length
+ * @str: the string to determine its length
  *
  * Return: the length of the string
  */
@@ -70,13 +70,11 @@ int _strlen(char *str)
 	int l = 0;
 
 	if (str == NULL)
-	{
 		return (0);
-	}
+
 	while (*str++)
-	{
 		l++;
-	}
+
 	return (l);
 }
 
@@ -92,16 +90,14 @@ int _strcmp(char *str1, char *str2)
 	while (*str1 && *str2)
 	{
 		if (*str1 != *str2)
-		{
 			return (*str1 - *str2);
-		}
+
 		str1++;
 		str2++;
 	}
 	if (*str1 == *str2)
-	{
 		return (0);
-	}
+
 	else
 	{
 		return (*str1 < *str2 ? -1 : 1);
