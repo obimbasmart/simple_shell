@@ -1,21 +1,27 @@
 #include "main.h"
 
-char *builtin_arr[] = { "cd", "exit",
-}; /* array of strings: builtin commands */
-
-int (*builtin_func[]) (char **) = { &my_cd, &my_exit,
-}; /* array of function pointers */
-
 /**
- * builtins_number - return the number of builtin functions
+ * execute_cmd - seeks to execute builtin functions
+ * @argv: array of command-line arguments passed to the program
  *
- * Return: int
+ * Return: return to initiation of process if the command is not builtin
  */
-int builtins_number(void)
+int execute_cmd(char **argv)
 {
-	return (sizeof(builtin_arr) / sizeof(char *));
-}
+	int (*builtin_func)(char **); /* function pointer to
+						* hold the address of a builtin function
+						*/
 
+	if (argv[0] == NULL) /* no command */
+		return (1);
+
+	builtin_func = get_func(argv[0]); /* get the builtin function */
+
+	if (builtin_func) /* if valid builtin */
+		return (builtin_func(argv));
+
+	return (init_process(argv));
+}
 
 /**
  * init_process - initiates the process
@@ -25,20 +31,18 @@ int builtins_number(void)
  */
 int init_process(char **toks)
 {
-	static int cmd_num = 0;
+	static int cmd_num = 0, stat;
 	pid_t pid;
-	int stat;
 	char *command_path = find_path(toks[0]);
 
 	cmd_num++; /* ????? */
 	pid = fork();
-
 	if (pid == 0) /* if child */
 	{
 		if (access(toks[0], X_OK) == 0) /* if pathname is an executable*/
 			execve(toks[0], toks, environ);
 
-		else if (command_path != NULL)
+		else if (command_path != NULL) /* command found */
 		{
 			if (execve(command_path, toks, environ) == -1)
 			{
@@ -48,7 +52,7 @@ int init_process(char **toks)
 			}
 			free(command_path);
 		}
-		else
+		else /* command not found */
 		{
 			fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_num, toks[0]);
 			free(command_path); /* free command_path if NULL*/
@@ -62,31 +66,11 @@ int init_process(char **toks)
 	else /* parent is process is running */
 	{
 		do {
-			waitpid(pid, &stat, WUNTRACED); /* wait for child process to exit or
-											 * get terminated by a signal
-											 */
+			waitpid(pid, &stat, WUNTRACED); /* wait for child process to exit
+									* or get terminated by a signal
+									*/
+
 		} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
 	}
 	return (1);
-}
-
-/**
- * execute_cmd - seeks to execute builtin functions
- * @argv: array of command-line arguments passed to the program
- *
- * Return: return to initiation of process if the command is not builtin
- */
-int execute_cmd(char **argv)
-{
-	int j;
-
-	if (argv[0] == NULL) /* no command */
-		return (1);
-
-	for (j = 0; j < builtins_number(); j++)
-	{
-		if (_strcmp(argv[0], builtin_arr[j]) == 0)
-			return ((*builtin_func[j])(argv));
-	}
-	return (init_process(argv));
 }
