@@ -55,8 +55,6 @@ int init_process(char **toks)
 		else /* command not found */
 		{
 			fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_num, toks[0]);
-			free(command_path); /* free command_path if NULL*/
-			free(toks);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -72,7 +70,7 @@ int init_process(char **toks)
 
 		} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
 	}
-	free(command_path); /* free command_path if NULL*/
+	free(command_path);
 	
 	return (1);
 }
