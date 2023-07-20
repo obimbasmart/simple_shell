@@ -35,7 +35,7 @@ char *print_env(char **argv);
 
 extern char **environ;
 
-void *_realloc(void *ptr, unsigned int former_size, unsigned int current_size);
+void *_realloc(void *ptr, unsigned int prev_size, unsigned int curr_size);
 int init_process(char **argv);
 int handle_cmd(char **argv);
 

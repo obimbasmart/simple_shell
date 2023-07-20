@@ -1,10 +1,8 @@
 #include "main.h"
-
 /**
- *tokenize_string - splits the string into tokens(small chunks of words)
- *@lineptr: pointer to the line read from the command-line
- *
- *Return: returns pointer to the array of tokens
+ * tokenize_string - splits the string into tokens(small chunks of words)
+ * @lineptr: pointer to the line read from the command-line
+ * Return: returns pointer to the array of tokens
  */
 char **tokenize_string(char *lineptr)
 {
@@ -26,6 +24,8 @@ char **tokenize_string(char *lineptr)
 		index++;
 		if (index >= buf)
 		{
+			buf += TOKEN_BUFFSIZE;
+			token = _realloc(token, buf, buf * sizeof(char*));
 			if (!toks)
 			{
 				write(STDERR_FILENO, error, _strlen(error));
@@ -37,22 +37,4 @@ char **tokenize_string(char *lineptr)
 	toks[index] = NULL;
 
 	return (toks);
-}
-
-/**
- * free_tokens - free an array of strings from memory
- * @toks: array of tokens
- *
- * Return: nothing
- */
-void free_tokens(char **toks)
-{
-	/*int i;*/
-
-	/*for (i = 0; toks[i] != NULL; i++) */
-	/*{ */
-	/*	free(toks[i]); */
-	/*} */
-	/*free the memory allocated for the toks array*/
-	free(toks);
 }
