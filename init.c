@@ -33,16 +33,15 @@ int init_process(char **toks)
 {
 	static int cmd_num = 0, stat;
 	pid_t pid;
-	char *command_path = find_path(toks[0]);
+	char *command_path;
 
-	cmd_num++; /* ????? */
+	cmd_num++; /* error number */
+	command_path = find_path(toks[0]);
 	pid = fork();
+
 	if (pid == 0) /* if child */
 	{
-		if (access(toks[0], X_OK) == 0) /* if pathname is an executable*/
-			execve(toks[0], toks, environ);
-
-		else if (command_path != NULL) /* command found */
+		if (command_path != NULL) /* command found and valid */
 		{
 			if (execve(command_path, toks, environ) == -1)
 			{
@@ -52,9 +51,11 @@ int init_process(char **toks)
 			}
 			free(command_path);
 		}
-		else /* command not found */
-		{
+
+		else
+		{/* command not found */
 			fprintf(stderr, "./hsh: %d: %s: not found\n", cmd_num, toks[0]);
+			free(command_path);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -65,12 +66,12 @@ int init_process(char **toks)
 	{
 		do {
 			waitpid(pid, &stat, WUNTRACED); /* wait for child process to exit
-									* or get terminated by a signal
+								* or get terminated by a signal
 								*/
 
 		} while (!WIFEXITED(stat) && !WIFSIGNALED(stat));
 	}
-	free(command_path);
-	
+	/* free(command_path); */
+
 	return (1);
 }

@@ -8,22 +8,31 @@
  */
 char *find_path(char *cmd)
 {
-	char *pathstring = getenv("PATH");
-	char *dir = strtok(pathstring, ":");
+	char *dir, *command_path, *path, *path_copy;
 
+	path = getenv("PATH");
+
+	/* check if path is already valid */
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+
+	path_copy = strdup(path);
+	dir = strtok(path_copy, ":");
 	while (dir != NULL)
 	{
-		char *pathbuffer = malloc(_strlen(dir) + _strlen(cmd) + 2);
+		/* char *command_path = malloc(_strlen(dir) + _strlen(cmd) + 2); */
+		command_path = malloc(sizeof(char) * TOKEN_BUFFSIZE);
+		sprintf(command_path, "%s/%s", dir, cmd);
 
-		sprintf(pathbuffer, "%s/%s", dir, cmd);
-
-		if (access(pathbuffer, X_OK) == 0)
+		if (access(command_path, X_OK) == 0)
 		{
-			return (pathbuffer);
+			free(path_copy);
+			return (command_path);
 		}
 		dir = strtok(NULL, ":");
 
-		free(pathbuffer);
+		free(command_path);
 	}
+	free(path_copy);
 	return (NULL);
 }

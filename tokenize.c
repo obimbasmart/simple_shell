@@ -25,7 +25,7 @@ char **tokenize_string(char *lineptr)
 		if (index >= buf)
 		{
 			buf += TOKEN_BUFFSIZE;
-			token = _realloc(token, buf, buf * sizeof(char*));
+			token = _realloc(token, buf, buf * sizeof(char *));
 			if (!toks)
 			{
 				write(STDERR_FILENO, error, _strlen(error));
