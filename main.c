@@ -27,7 +27,7 @@ void myshell_loop(void)
 	size_t buf = 0; /*buffer size allocated by getline()*/
 	ssize_t charsRead;
 
-	shell_data.error_num = 1;
+	shell_data.error_num = 0;
 	do {
 		if (isatty(STDIN_FILENO)) /* interactive mode */
 		{

@@ -8,22 +8,29 @@
  */
 char *find_path(char *cmd)
 {
-	char *dir, *command_path, *path, *path_copy;
-
-	path = getenv("PATH");
-	command_path = NULL;
+	char *dir, *path, *path_copy, *command_path;
+	size_t command_path_lenght = 0;
 
 	/* check if path is already valid */
 	if (access(cmd, X_OK) == 0)
-		return (cmd);
+	{
+		return (strdup(cmd));
+	}
 
+	path = getenv("PATH");
+	command_path = NULL;
 	path_copy = strdup(path);
 	dir = strtok(path_copy, ":");
+
 	while (dir != NULL)
 	{
-		/* char *command_path = malloc(_strlen(dir) + _strlen(cmd) + 2); */
-		command_path = malloc(sizeof(char) * TOKEN_BUFFSIZE);
-		sprintf(command_path, "%s/%s", dir, cmd);
+		command_path_lenght = strlen(dir) + strlen(cmd) + 2;
+		command_path = malloc(command_path_lenght);
+		/* snprintf(command_path, command_path_lenght, "%s/%s", dir, cmd); */
+
+		strcpy(command_path, dir);
+		strcat(command_path, "/");
+		strcat(command_path, cmd);
 
 		if (access(command_path, X_OK) == 0)
 		{

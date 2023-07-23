@@ -61,8 +61,8 @@ typedef struct builtins
 } builtin_t;
 
 /**
- * global_vars - a struct where each member is a global variable
- * @error_num - error number
+ * struct global_vars - a struct where each member is a global variable
+ * @error_num: error number
  */
 typedef struct global_vars
 {
