@@ -1,5 +1,7 @@
 #include "main.h"
 
+g_vars_t shell_data; /* defind global variable */
+
 /**
  * main - Entry point to the shell loop
  *
@@ -25,6 +27,7 @@ void myshell_loop(void)
 	size_t buf = 0; /*buffer size allocated by getline()*/
 	ssize_t charsRead;
 
+	shell_data.error_num = 1;
 	do {
 		if (isatty(STDIN_FILENO)) /* interactive mode */
 		{

@@ -11,6 +11,7 @@ char *find_path(char *cmd)
 	char *dir, *command_path, *path, *path_copy;
 
 	path = getenv("PATH");
+	command_path = NULL;
 
 	/* check if path is already valid */
 	if (access(cmd, X_OK) == 0)

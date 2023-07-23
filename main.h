@@ -49,17 +49,28 @@ int execute_cmd(char **argv);
 void free_tokens(char **toks);
 
 /**
- * struct builtins - a struct reprenting a builtin function
+ * struct builtins - a struct representing a builtin function
  * @name: name of builtin
  * @func: function associated for each builtin
  */
 typedef struct builtins
 {
-	char *name; /* name of builtin */
-
+	char *name;
 	int (*func)(char **argv); /* function pointer */
 
 } builtin_t;
+
+/**
+ * global_vars - a struct where each member is a global variable
+ * @error_num - error number
+ */
+typedef struct global_vars
+{
+	int error_num;
+
+} g_vars_t;
+
+extern g_vars_t shell_data; /* global variable */
 
 /*** utility functions ***/
 int (*get_func(char *name))(char **argv);
