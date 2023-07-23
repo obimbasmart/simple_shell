@@ -7,19 +7,42 @@
  */
 int my_cd(char **argv)
 {
-	char *errstr = "tsh: expected argument to cd\n";
+	char *homePath = getenv("HOME");
+	char *prevPath = getenv("PWD");
+	char *error = "Previous directory not set.\n";
+	char *current_path = getcwd(NULL, 0);
 
-	if (argv[1] == NULL)
-		write(STDERR_FILENO, errstr, _strlen(errstr));
-
+	if (argv[1] == NULL || strcmp(argv[1], "~") == 0)
+	{
+		if (chdir(homePath) != 0)
+			perror("hsh");
+	}
+	else if (strcmp(argv[1], "-") == 0)
+	{
+		if (prevPath == NULL)
+			write(STDERR_FILENO, error, strlen(error));
+		else if (chdir(prevPath) != 0)
+			perror("hsh");
+	}
 	else
 	{
+		/*changing to a specified directory*/
 		if (chdir(argv[1]) != 0)
-			perror("tsh");
+			perror("hsh");
+		else
+		{
+			/* updating PWD to current directory*/
+			if (current_path != NULL)
+			{
+				setenv("PWD", current_path, 1);
+				free(current_path);
+			}
+			else
+				perror("hsh");
+		}
 	}
 	return (1);
 }
-
 /**
  * my_exit - exits the shell when the exit command is keyed
  * @argv: array of command-line arguments passed to the program
