@@ -1,62 +1,49 @@
 #include "main.h"
-
 /**
- **_strncopy - copies content
- *@dest: where to copy the string
- *@origin: the origin of the string
- *@n: number of characters to be copied
+ * _strncopy - copies content
+ * @dest: where to copy the string
+ * @origin: the origin of the string
  *
- *Return: the concatenated string
+ * Return: the concatenated string
  */
-char *_strncopy(char *dest, char *origin, int n)
+char *_strncopy(char *dest, char *origin)
 {
-	int j, k;
-	char *p = dest;
+	int l = 0;
+	int x = 0;
 
-	k = 0;
-	while (origin[k] != '\0' && k < n - 1)
+	while (*(origin + l) != '\0')
+		l++;
+	for ( ; x < l ; x++)
 	{
-		dest[k] = origin[k];
-		k++;
+		dest[x] = origin[x];
 	}
-	if (k < n)
-	{
-		j = k;
-		while (j < n)
-		{
-			dest[j] = '\0';
-			j++;
-		}
-	}
-	return (p);
+	dest[l] = '\0';
+	return (dest);
 }
-
 /**
- **_strncat - concatenates contents two strings
- *@dest: where the contents of a string are appended
- *@origin: the string to concatenate
- *@n: the number of bytes to be used at most
+ * _strncat - concatenates two strings
+ * @dest: string to add to
+ * @origin: string to add
  *
- *Return: the concatenated string
+ * Return: concatenated string
  */
-char *_strncat(char *dest, char *origin, int n)
+char *_strncat(char *dest, char *origin)
 {
-	int k, j;
-	char *c = dest;
+	int i = 0;
+	int j;
 
-	k = 0;
+	while (dest[i] != '\0')
+		i++;
 	j = 0;
-	while (dest[k] != '\0')
-		k++;
-	while (origin[j] != '\0' && j < n)
+	while (origin[j] != '\0')
 	{
-		dest[k] = origin[j];
-		k++;
+		dest[i] = origin[j];
+		i++;
 		j++;
 	}
-	if (j < n)
-		dest[k] = '\0';
-	return (c);
+	dest[i] = '\0';
+
+	return (dest);
 }
 
 /**
