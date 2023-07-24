@@ -24,8 +24,8 @@ int my_cd(char **argv);
 int my_exit(char **argv);
 
 /* string functions*/
-char *_strncopy(char *dest, char *origin, int n);
-char *_strncat(char *dest, char *origin, int n);
+char *_strncopy(char *dest, char *origin);
+char *_strncat(char *dest, char *origin);
 int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
 

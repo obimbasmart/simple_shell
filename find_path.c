@@ -24,13 +24,12 @@ char *find_path(char *cmd)
 
 	while (dir != NULL)
 	{
-		command_path_lenght = strlen(dir) + strlen(cmd) + 2;
+		command_path_lenght = _strlen(dir) + _strlen(cmd) + 2;
 		command_path = malloc(command_path_lenght);
-		/* snprintf(command_path, command_path_lenght, "%s/%s", dir, cmd); */
 
-		strcpy(command_path, dir);
-		strcat(command_path, "/");
-		strcat(command_path, cmd);
+		_strncopy(command_path, dir);
+		_strncat(command_path, "/");
+		_strncat(command_path, cmd);
 
 		if (access(command_path, X_OK) == 0)
 		{
