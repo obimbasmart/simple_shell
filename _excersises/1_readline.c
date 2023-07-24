@@ -17,10 +17,9 @@ int main(int __attribute__((unused)) ac, char __attribute((unused)) **av)
 	n = 0;
 	printf("/$ ");
 
-	while ((nread = getline(&buffer, &n, stdin)) != -1)
-
+	while ((nread = _getline(&buffer, &n, stdin)) != -1)
 	{
-		printf("%s", buffer);
+		printf("%slen: %ldgetlen: %lu\n", buffer, strlen(buffer), nread);
 		printf("/$ ");
 	}
 

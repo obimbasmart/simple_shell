@@ -28,6 +28,8 @@ void myshell_loop(void)
 	ssize_t charsRead;
 
 	shell_data.error_num = 0;
+	shell_data.IN_BUFFSIZE = 120;
+
 	do {
 		if (isatty(STDIN_FILENO)) /* interactive mode */
 		{
@@ -35,19 +37,19 @@ void myshell_loop(void)
 			fflush(stdout);
 		}
 
-		charsRead = getline(&lineptr, &buf, stdin);
+		charsRead = _getline(&lineptr, &buf, stdin);
 		if (charsRead == -1)
 		{
 			if (feof(stdin))
 			{
 				write(STDOUT_FILENO, "\r", 1);
-				free(lineptr);
+				/* free(lineptr); */
 				exit(0);/*EOF is received*/
 			}
 			else
 			{
-				perror("can't read line");
-				free(argv);
+				/* perror("can't read line"); */
+				/* free(argv); */
 				exit(0);
 			}
 		}

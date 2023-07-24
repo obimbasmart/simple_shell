@@ -14,17 +14,19 @@
 
 
 #define TOKEN_BUFFSIZE 64
-#define BUFFER_SIZE 1024
 
 /* builtins */
-size_t _getline(char **buffer, size_t *n, FILE *);
+ssize_t _getline(char **buffer, size_t *n, FILE *);
+void assign_buffer(char *buffer, char **lineptr,
+		size_t n_buff, size_t *n_lineptr);
 
 /*builtin () prototypes*/
 int my_cd(char **argv);
 int my_exit(char **argv);
 
 /* string functions*/
-char *_strncopy(char *dest, char *origin);
+char *_strdup(char *str);
+char *_strcpy(char *dest, char *origin);
 char *_strncat(char *dest, char *origin);
 int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
@@ -63,10 +65,12 @@ typedef struct builtins
 /**
  * struct global_vars - a struct where each member is a global variable
  * @error_num: error number
+ * @IN_BUFFSIZE: buffer size used for malloc allocation for getline
  */
 typedef struct global_vars
 {
 	int error_num;
+	size_t IN_BUFFSIZE;
 
 } g_vars_t;
 

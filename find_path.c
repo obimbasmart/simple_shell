@@ -19,7 +19,7 @@ char *find_path(char *cmd)
 
 	path = getenv("PATH");
 	command_path = NULL;
-	path_copy = strdup(path);
+	path_copy = _strdup(path);
 	dir = strtok(path_copy, ":");
 
 	while (dir != NULL)
@@ -27,7 +27,7 @@ char *find_path(char *cmd)
 		command_path_lenght = _strlen(dir) + _strlen(cmd) + 2;
 		command_path = malloc(command_path_lenght);
 
-		_strncopy(command_path, dir);
+		_strcpy(command_path, dir);
 		_strncat(command_path, "/");
 		_strncat(command_path, cmd);
 

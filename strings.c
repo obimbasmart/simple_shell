@@ -1,4 +1,39 @@
 #include "main.h"
+
+/**
+ * _strdup - function that returns a pointer to a newly
+ * allocated space in memory, which contains
+ * a copy of the string given as a parameter.
+ * and initialize it with @c
+ * @str: the string to copy
+ * Return: int
+ */
+char *_strdup(char *str)
+{
+	char *ptr;
+	int len, i;
+
+	len = 0;
+	if (!str)
+		return (NULL);
+
+	while (str[len] != '\0')
+		len++;
+
+	ptr = malloc((1 + len) * sizeof(char));
+
+	if (!ptr)
+		return (NULL);
+
+	i = 0;
+	while (i < len)
+	{
+		ptr[i] = str[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
 /**
  * _strncopy - copies content
  * @dest: where to copy the string
@@ -6,7 +41,7 @@
  *
  * Return: the concatenated string
  */
-char *_strncopy(char *dest, char *origin)
+char *_strcpy(char *dest, char *origin)
 {
 	int l = 0;
 	int x = 0;
