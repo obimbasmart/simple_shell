@@ -25,3 +25,4 @@ int (*get_func(char *name))(char **argv)
 	}
 	return (NULL);
 }
+

@@ -34,5 +34,6 @@ rmdir <directory>: Remove a directory (only works if it's empty).
 man <program> : Provide information about a command,function or a system call
 exit: Exit the command line interpreter.
 
-Contribution:
+Contributing
 We welcome contributions to improve the Unix Command Line Interpreter. If you find any issues or have ideas for enhancements, please open an issue or submit a pull request on the project's GitHub repository.
+

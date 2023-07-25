@@ -84,3 +84,4 @@ void assign_buffer(char *buffer, char **lineptr,
 		}
 		_strcpy(*lineptr, buffer);
 }
+

@@ -21,4 +21,6 @@ char **tokenize_str(char *line);
 void free_tokens(char **toks);
 void mem_check(char **buffer, size_t *n, size_t nread);
 void assign_buffer(char *buffer, char **lineptr, size_t n_buff, size_t *n_lineptr);
+
 #endif
+

@@ -14,7 +14,7 @@ char *find_path(char *cmd)
 	/* check if path is already valid */
 	if (access(cmd, X_OK) == 0)
 	{
-		return (strdup(cmd));
+		return (_strdup(cmd));
 	}
 
 	path = getenv("PATH");
@@ -43,3 +43,4 @@ char *find_path(char *cmd)
 	free(path_copy);
 	return (NULL);
 }
+

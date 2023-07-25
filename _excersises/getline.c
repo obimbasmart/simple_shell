@@ -114,4 +114,3 @@ void assign_buffer(char *buffer, char **lineptr, size_t n_buff, size_t *n_linept
 		free(buffer);
 }
 
-

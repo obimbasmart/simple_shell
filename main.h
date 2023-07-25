@@ -32,23 +32,17 @@ int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
 
 char *find_path(char *cmd);
-char *my_getline(void);
-char *print_env(char **argv);
 
 extern char **environ;
 
 void *_realloc(void *ptr, unsigned int prev_size, unsigned int curr_size);
 int init_process(char **argv);
-int handle_cmd(char **argv);
 
 /*functions in main*/
 void myshell_loop(void);
-char *get_line(void);
 int _putchar(char *c);
 char **tokenize_string(char *lineptr);
 int execute_cmd(char **argv);
-
-void free_tokens(char **toks);
 
 /**
  * struct builtins - a struct representing a builtin function
@@ -78,4 +72,6 @@ extern g_vars_t shell_data; /* global variable */
 
 /*** utility functions ***/
 int (*get_func(char *name))(char **argv);
+
 #endif
+

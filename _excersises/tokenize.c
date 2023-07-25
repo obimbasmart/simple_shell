@@ -37,3 +37,4 @@ char **tokenize_str(char *line)
 	toks[index] = NULL;
 	return toks;
 }
+

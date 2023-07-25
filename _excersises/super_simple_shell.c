@@ -62,3 +62,4 @@ void free_tokens(char **toks)
 	/*free the memory allocated for the toks array */
 	free(toks);
 }
+
