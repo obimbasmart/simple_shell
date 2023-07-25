@@ -40,7 +40,6 @@ int init_process(char **argv);
 
 /*functions in main*/
 void myshell_loop(void);
-int _putchar(char *c);
 char **tokenize_string(char *lineptr);
 int execute_cmd(char **argv);
 
@@ -72,6 +71,11 @@ extern g_vars_t shell_data; /* global variable */
 
 /*** utility functions ***/
 int (*get_func(char *name))(char **argv);
+
+/***error functions **/
+void print_error(char **argv);
+void print_integer(int num);
+int count_digits(int num);
 
 #endif
 

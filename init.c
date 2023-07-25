@@ -42,8 +42,7 @@ int init_process(char **toks)
 						*/
 	{
 		shell_data.error_num += 1;
-		fprintf(stderr, "./hsh: %d: %s: not found\n",
-				shell_data.error_num, toks[0]);
+		print_error(toks);
 		free(command_path);
 		return (1);
 	}
