@@ -24,7 +24,7 @@ void print_error(char **argv)
 	write(STDERR_FILENO, "\n", 1);
 }
 /**
- * print_integer - writes the error number integer as a string to the standard error
+ * print_integer - writes the error number integer as a string to stderr
  * @num: the error number;
  *
  * Return: void
@@ -41,7 +41,7 @@ void print_integer(int num)
 		return;
 	}
 	buffer[length] = '\0';
-	
+
 	while (num != 0)
 	{
 		buffer[--length] = '0' + (num % 10);
@@ -58,6 +58,7 @@ void print_integer(int num)
 int count_digits(int num)
 {
 	int count = 0;
+
 	if (num == 0)
 		return (1);
 	while (num != 0)
