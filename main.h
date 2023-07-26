@@ -17,8 +17,6 @@
 
 /* builtins */
 ssize_t _getline(char **buffer, size_t *n, FILE *);
-void assign_buffer(char *buffer, char **lineptr,
-		size_t n_buff, size_t *n_lineptr);
 
 /*builtin () prototypes*/
 int my_cd(char **argv);
@@ -71,6 +69,9 @@ extern g_vars_t shell_data; /* global variable */
 
 /*** utility functions ***/
 int (*get_func(char *name))(char **argv);
+void memcheck(char **buffer, size_t nread);
+void assign_buffer(char *buffer, char **lineptr,
+		size_t n_buff, size_t *n_lineptr);
 
 /***error functions **/
 void print_error(char **argv);

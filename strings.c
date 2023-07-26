@@ -6,7 +6,7 @@
  * a copy of the string given as a parameter.
  * and initialize it with @c
  * @str: the string to copy
- * Return: int
+ * Return: pointer to newly allocated memory
  */
 char *_strdup(char *str)
 {
@@ -35,7 +35,7 @@ char *_strdup(char *str)
 	return (ptr);
 }
 /**
- * _strncopy - copies content
+ * _strcpy - copies content from origin to dest
  * @dest: where to copy the string
  * @origin: the origin of the string
  *
@@ -82,8 +82,8 @@ char *_strncat(char *dest, char *origin)
 }
 
 /**
- * _strlen - returns the string length
- * @str: the string to determine its length
+ * _strlen - returns the lenght of a string
+ * @str: string
  *
  * Return: the length of the string
  */
@@ -101,7 +101,7 @@ int _strlen(char *str)
 }
 
 /**
- * _strcmp - performs comparison of two strangs.
+ * _strcmp - performs comparison of two strings.
  * @str1: first string
  * @str2: second string
  *
@@ -120,9 +120,6 @@ int _strcmp(char *str1, char *str2)
 	if (*str1 == *str2)
 		return (0);
 
-	else
-	{
-		return (*str1 < *str2 ? -1 : 1);
-	}
+	return (*str1 < *str2 ? -1 : 1);
 }
 

@@ -14,19 +14,12 @@ ssize_t _getline(char **lineptr, size_t *n,
 	ssize_t nread_ret;
 	size_t nread_t;
 	int nread;
-	char *buffer;
-	char _char;
+	char *buffer, _char;
 
-	nread = nread_t = 0;
-	_char  = 'a';
-
+	nread = nread_t = _char  = 0;
 	if (lineptr == NULL || n == NULL)
 		return (-1);
-	if (nread_t == 0)
-		fflush(stdout);
-	else
-		return (-1);
-
+	fflush(stdout);
 	buffer = malloc(sizeof(char) * shell_data.IN_BUFFSIZE);
 	if (!buffer)
 		return (-1);
@@ -45,11 +38,7 @@ ssize_t _getline(char **lineptr, size_t *n,
 			nread_t++;
 			break;
 		}
-		if (nread_t >= shell_data.IN_BUFFSIZE) /* memory full */
-		{
-			shell_data.IN_BUFFSIZE *= 2;
-			buffer = _realloc(buffer, nread_t, shell_data.IN_BUFFSIZE);
-		}
+		memcheck(&buffer, nread_t);
 		buffer[nread_t] = _char;
 		nread_t += 1;
 	}
@@ -83,5 +72,26 @@ void assign_buffer(char *buffer, char **lineptr,
 			return;
 		}
 		_strcpy(*lineptr, buffer);
+}
+
+/**
+ * memcheck - check if buffer memory is full
+ * reallocate if neccessary
+ * @buffer: pointer to buffer
+ * @nread: current size of buffer
+ *
+ * Return: nothing
+ */
+void memcheck(char **buffer, size_t nread)
+{
+	/**
+	 * if current size of buffer is greater than
+	 * previously allocated memory
+	 */
+	if (nread >= shell_data.IN_BUFFSIZE)
+	{
+		shell_data.IN_BUFFSIZE *= 2; /* update buffer size */
+		*buffer = _realloc(*buffer, nread, shell_data.IN_BUFFSIZE);
+	}
 }
 

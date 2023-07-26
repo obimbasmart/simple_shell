@@ -43,15 +43,9 @@ void myshell_loop(void)
 			if (feof(stdin))
 			{
 				write(STDOUT_FILENO, "\r", 1);
-				/* free(lineptr); */
 				exit(0);/*EOF is received*/
 			}
-			else
-			{
-				/* perror("can't read line"); */
-				/* free(argv); */
-				exit(0);
-			}
+			exit(0);
 		}
 		argv = tokenize_string(lineptr); /* split line into tokens */
 		stat = execute_cmd(argv);

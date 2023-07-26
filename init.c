@@ -37,9 +37,7 @@ int init_process(char **toks)
 
 	command_path = find_path(toks[0]);
 
-	if (command_path == NULL) /* fork must not be called if
-						*command does not exist
-						*/
+	if (command_path == NULL) /* invalid command */
 	{
 		shell_data.error_num += 1;
 		print_error(toks);

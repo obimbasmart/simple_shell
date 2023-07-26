@@ -3,6 +3,7 @@
 /**
  * my_cd - changes the current working directory
  * @argv: command-line arguments passed to the program
+ *
  * Return: 1 on sucess
  */
 int my_cd(char **argv)
@@ -48,12 +49,8 @@ int my_cd(char **argv)
  * @argv: array of command-line arguments passed to the program
  * Return: 0 on success
  */
-int my_exit(char **argv)
+int my_exit(char __attribute__((unused)) **argv)
 {
-	if (argv[0])
-	{
-		/*in case first argument seeks to exit the shell*/
-	}
 	return (0);
 }
 
