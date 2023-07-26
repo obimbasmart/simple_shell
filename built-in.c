@@ -12,15 +12,15 @@ int my_cd(char **argv)
 	char *error = "Previous directory not set.\n";
 	char *current_path = getcwd(NULL, 0);
 
-	if (argv[1] == NULL || strcmp(argv[1], "~") == 0)
+	if (argv[1] == NULL || _strcmp(argv[1], "~") == 0)
 	{
 		if (chdir(homePath) != 0)
 			perror("hsh");
 	}
-	else if (strcmp(argv[1], "-") == 0)
+	else if (_strcmp(argv[1], "-") == 0)
 	{
 		if (prevPath == NULL)
-			write(STDERR_FILENO, error, strlen(error));
+			write(STDERR_FILENO, error, _strlen(error));
 		else if (chdir(prevPath) != 0)
 			perror("hsh");
 	}
