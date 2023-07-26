@@ -4,11 +4,11 @@ Simple Shell is a lightweight and user-friendly C-based shell implementation for
 ## How to Use
 To use the program, follow the following steps:
 - Clone the repo to your local machine:
-    `git clone  https://github.com/obimbasmart/simple_shell.git`
+    - `git clone  https://github.com/obimbasmart/simple_shell.git`
 - Compile the C files in the simple_shell directory to generate an executable:
-    `gcc -Wall -Wextra - Werror -pedantic -std=gnu89 *.c -o hsh`
+    - `gcc -Wall -Wextra - Werror -pedantic -std=gnu89 *.c -o hsh`
 - Run the executable:
-    `./hsh`
+    - `./hsh`
 
 Once the interpreter is running, you can type commands and press Enter to execute them. The interpreter will process the command and perform the appropriate actions
 
