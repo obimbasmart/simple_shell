@@ -1,39 +1,37 @@
-Unix Command Line Interpreter:
-The Unix Command Line Interpreter is a simple command-line application that allows users to enter commands and execute them in a Unix-like environment. It provides a basic interface for interacting with the operating system, running various commands, and performing tasks efficiently.
-This project has been developed under stringent measures for memory management
+# Simple Shell Project
+Simple Shell is a lightweight and user-friendly C-based shell implementation for Unix-like systems.It allows users to enter commands and execute them in a Unix-like environment. It provides a basic interface for interacting with the operating system, running various commands, and performing tasks efficiently. This project has been developed under stringent measures for memory management and good practices
 
-Getting Started:
-To use the Unix CLI ,follow these steps;
+## How to Use
+To use the program, follow the following steps:
+- Clone the repo to your local machine:
+    `git clone  https://github.com/obimbasmart/simple_shell.git`
+- Compile the C files in the simple_shell directory to generate an executable:
+    `gcc -Wall -Wextra - Werror -pedantic -std=gnu89 *.c -o hsh`
+- Run the executable:
+    `./hsh`
 
-1. Clone the repo to your local machine:
+Once the interpreter is running, you can type commands and press Enter to execute them. The interpreter will process the command and perform the appropriate actions
 
-git clone https://github.com/obimbasmart/simple_shell.git
+Here are some list of supported commands amongst others:
+- `ls` - List files and directories in the current directory
+- `cd` - Change the current working directory to the specified directory
+- `mkdir` : Create a new directory with the given name. rm
 
-2. Change to the simple_shell directory:
+## Files
+- `mainc` - This is the entry point of the program
+- `main.h` - Header file for the project
 
-cd simple_shell
+## Learning
+While building SimpleShell, We had the opportunity to learn and apply various technologies and concepts, including:
+- Process management
+- Memory management
+- System calls
+- Signals and interrupt
 
-3. Compile the C files in the simple_shell directory to generate an executable:
-
-gcc -Wall -Wextra - Werror -pedantic -std=gnu89 *.c -o hsh
-
-4. Run the executable 
-
-./hsh
-
-Usage:
-Once the interpreter is running, you can type commands and press Enter to execute them. The interpreter will process the command and perform the appropriate actions.
-
-Here are some examples of supported commands:
-
-ls: List files and directories in the current directory.
-cd <directory>: Change the current working directory to the specified directory.
-mkdir <directory>: Create a new directory with the given name.
-rm <file>: Remove a file.
-rmdir <directory>: Remove a directory (only works if it's empty).
-man <program> : Provide information about a command,function or a system call
-exit: Exit the command line interpreter.
-
-Contributing
-We welcome contributions to improve the Unix Command Line Interpreter. If you find any issues or have ideas for enhancements, please open an issue or submit a pull request on the project's GitHub repository.
+## Authors
+- Alvin Agaromba: https://github.com/Alvin05-maker
+- Obimba Smart: https://github.com/obimbasmart
+- 
+## Contributing
+Contributions are welcome to improve the project. If you find any issues or have ideas for enhancements, please open an issue or submit a pull request
 
