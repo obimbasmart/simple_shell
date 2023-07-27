@@ -56,13 +56,13 @@ char *_strcpy(char *dest, char *origin)
 	return (dest);
 }
 /**
- * _strncat - concatenates two strings
+ * _strcat - concatenates two strings
  * @dest: string to add to
  * @origin: string to add
  *
  * Return: concatenated string
  */
-char *_strncat(char *dest, char *origin)
+char *_strcat(char *dest, char *origin)
 {
 	int i = 0;
 	int j;

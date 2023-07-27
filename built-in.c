@@ -8,8 +8,8 @@
  */
 int my_cd(char **argv)
 {
-	char *homePath = getenv("HOME");
-	char *prevPath = getenv("PWD");
+	char *homePath = _getenv("HOME");
+	char *prevPath = _getenv("PWD");
 	char *error = "Previous directory not set.\n";
 	char *current_path = getcwd(NULL, 0);
 

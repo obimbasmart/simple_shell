@@ -13,11 +13,9 @@ char *find_path(char *cmd)
 
 	/* check if path is already valid */
 	if (access(cmd, X_OK) == 0)
-	{
 		return (_strdup(cmd));
-	}
 
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	command_path = NULL;
 	path_copy = _strdup(path);
 	dir = strtok(path_copy, ":");
@@ -28,8 +26,8 @@ char *find_path(char *cmd)
 		command_path = malloc(command_path_lenght);
 
 		_strcpy(command_path, dir);
-		_strncat(command_path, "/");
-		_strncat(command_path, cmd);
+		_strcat(command_path, "/");
+		_strcat(command_path, cmd);
 
 		if (access(command_path, X_OK) == 0)
 		{

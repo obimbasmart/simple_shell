@@ -25,11 +25,12 @@ int my_exit(char **argv);
 /* string functions*/
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *origin);
-char *_strncat(char *dest, char *origin);
+char *_strcat(char *dest, char *origin);
 int _strcmp(char *str1, char *str2);
 int _strlen(char *str);
 
 char *find_path(char *cmd);
+char *_getenv(char *name);
 
 extern char **environ;
 
@@ -68,6 +69,7 @@ typedef struct global_vars
 extern g_vars_t shell_data; /* global variable */
 
 /*** utility functions ***/
+char *_is_in_env(char *name);
 int (*get_func(char *name))(char **argv);
 void memcheck(char **buffer, size_t nread);
 void assign_buffer(char *buffer, char **lineptr,
