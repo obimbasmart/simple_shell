@@ -67,7 +67,10 @@ void assign_buffer(char *buffer, char **lineptr,
 {
 		if (*lineptr == NULL || *n_lineptr < n_buff)
 		{
-			*lineptr = _strdup(buffer);
+			*lineptr = malloc(sizeof(char) * shell_data.IN_BUFFSIZE);
+			if (!lineptr)
+				return;
+			*lineptr = _strcpy(*lineptr, buffer);
 			*n_lineptr = shell_data.IN_BUFFSIZE;
 			return;
 		}
